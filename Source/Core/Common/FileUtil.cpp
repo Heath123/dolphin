@@ -14,6 +14,8 @@
 #include <sys/stat.h>
 #include <thread>
 #include <vector>
+#include <map>
+#include <sstream>
 
 #include "Common/Assert.h"
 #include "Common/Common.h"
@@ -56,6 +58,8 @@
 #ifndef S_ISDIR
 #define S_ISDIR(m) (((m)&S_IFMT) == S_IFDIR)
 #endif
+
+// TODO: Test adding new files to disc, recursive folder patches
 
 // This namespace has various generic functions related to files and paths.
 // The code still needs a ton of cleanup.
@@ -474,6 +478,41 @@ bool CreateEmptyFile(const std::string& filename)
   return true;
 }
 
+FSTEntry createEntry(const std::string& physical_name, const std::string& virtual_name,
+                     const bool& recursive)
+{
+  FSTEntry entry;
+  const FileInfo file_info(physical_name);
+  entry.isDirectory = file_info.IsDirectory();
+  if (entry.isDirectory)
+  {
+    if (recursive)
+      entry = ScanDirectoryTree(physical_name, true);
+    else
+      entry.size = 0;
+  }
+  else
+  {
+    entry.size = file_info.GetSize();
+  }
+  entry.virtualName = virtual_name;
+  entry.physicalName = physical_name;
+
+  return entry;
+}
+
+void addEntryToParent(FSTEntry& entry, FSTEntry& parent_entry)
+{
+  if (entry.isDirectory)
+  {
+    parent_entry.size += entry.size;
+  }
+
+  ++parent_entry.size;
+  // Push into the tree
+  parent_entry.children.push_back(entry);
+}
+
 // Recursive or non-recursive list of files and directories under directory.
 FSTEntry ScanDirectoryTree(const std::string& directory, bool recursive)
 {
@@ -541,28 +580,42 @@ FSTEntry ScanDirectoryTree(const std::string& directory, bool recursive)
 #endif
     if (virtual_name == "." || virtual_name == "..")
       continue;
-    auto physical_name = directory + DIR_SEP + virtual_name;
-    FSTEntry entry;
-    const FileInfo file_info(physical_name);
-    entry.isDirectory = file_info.IsDirectory();
-    if (entry.isDirectory)
-    {
-      if (recursive)
-        entry = ScanDirectoryTree(physical_name, true);
-      else
-        entry.size = 0;
-      parent_entry.size += entry.size;
-    }
-    else
-    {
-      entry.size = file_info.GetSize();
-    }
-    entry.virtualName = virtual_name;
-    entry.physicalName = physical_name;
 
-    ++parent_entry.size;
-    // Push into the tree
-    parent_entry.children.push_back(entry);
+    // const std::string full_virtual_name = directory + DIR_SEP + virtual_name;
+
+    auto real_path = directory + DIR_SEP + virtual_name;
+    auto physical_name = /*modifyPath(*/real_path/*)*/;
+
+    FSTEntry entry = createEntry(physical_name, virtual_name, recursive);
+
+    // OutputDebugStringA((std::to_string(entry.children.size()) + " children\n").c_str());
+
+    /* if (entry.isDirectory)
+    {
+      OutputDebugStringA(("Folder: " + real_path + "\n").c_str());
+    }
+
+    if (entry.isDirectory && (patchedFiles.find(real_path) != patchedFiles.end() ||
+                              patchedFiles.find(real_path + "/") != patchedFiles.end()))
+    {
+      OutputDebugStringA("PATCH!!!!!!!!!!!!!!!!!!!!\n");
+      FSTEntry newEntry = createEntry("C:/Users/User/Desktop/test.txt", "test.szs", false);
+      addEntryToParent(newEntry, entry);
+    } */
+
+    // OutputDebugStringA((std::to_string(entry.children.size()) + " children\n").c_str());
+
+    addEntryToParent(entry, parent_entry);
+
+    const FileInfo file_info(physical_name);
+
+    /* // TODO: Make sure it doesn't break when calling multiple times with the same folder
+    if (directory == "C:/Users/User/Desktop/mkwii-extract/DATA/files//Race")
+    {
+      OutputDebugStringA("PATCH!!!!!!!!!!!!!!!!!!!!");
+      addEntryToParent("C:/Users/User/Desktop/test.txt", "test.szs", parent_entry, false);
+    } */
+
 #ifdef _WIN32
   } while (FindNextFile(hFind, &ffd) != 0);
   FindClose(hFind);
@@ -573,6 +626,91 @@ FSTEntry ScanDirectoryTree(const std::string& directory, bool recursive)
 #endif
 
   return parent_entry;
+}
+
+// Don't use createDirs (yet)
+void AddToFileTreeRecursive(FSTEntry& tree, std::vector<FSTEntry*> parents,
+                            std::vector<std::string> foundDirParts,
+                            std::vector<std::string> remainingDirParts, std::string name,
+                            std::string dest, bool createFullPath, bool createIfNotExists)
+{
+  if (remainingDirParts.size() == 0)
+  {
+    for (FSTEntry& child : tree.children)
+    {
+      if (!child.isDirectory && child.virtualName == name)
+      {
+        child.physicalName = dest;
+        child.size = GetSize(dest);
+
+        return;
+      }
+    }
+    if (createIfNotExists)
+    {
+      // addFileToTree(tree, name, dest);
+      FSTEntry newEntry = createEntry(dest, name, false);
+      addEntryToParent(newEntry, tree);
+
+      for (FSTEntry* parent : parents)
+      {
+        ++(*parent).size;
+      }
+    }
+    return;
+  }
+  else
+  {
+    for (FSTEntry& child : tree.children)
+    {
+      if (child.isDirectory && child.virtualName == remainingDirParts[0])
+      {
+        foundDirParts.push_back(remainingDirParts[0]);
+        remainingDirParts.erase(remainingDirParts.begin());
+        parents.push_back(&tree);
+        return AddToFileTreeRecursive(child, parents, foundDirParts, remainingDirParts, name, dest,
+                                      createFullPath, createIfNotExists);
+      }
+    }
+    if (createFullPath)
+    {
+      foundDirParts.push_back(remainingDirParts[0]);
+      // print('adding dir', remainingDirParts[0]);
+      remainingDirParts.erase(remainingDirParts.begin());
+      // FSTEntry& newDir = addDirToTree(tree, remainingDirParts[0], "");
+      parents.push_back(&tree);
+      /* return addToFileTreeRecursive(newDir, tree, foundDirParts, remainingDirParts, name, dest,
+                                    createDirs, create); */
+    }
+  }
+}
+
+// Wraps AddToFileTreeRecursive to make it more intuitive
+void AddToFileTree(FSTEntry& tree, std::string path, std::string dest, bool createFullPath, bool createIfNotExists)
+{
+  // Create fake parent
+  File::FSTEntry parent_entry;
+  parent_entry.physicalName = ""; // TODO: need to use real physical name?
+  parent_entry.isDirectory = true;
+  parent_entry.size = 0;
+
+  // Split string
+  // Based on https://thispointer.com/how-to-split-a-string-in-c/
+  std::stringstream ss(path);
+  std::string item;
+  std::vector<std::string> splitDir;
+  while (std::getline(ss, item, '/'))
+  {
+    if (item != "") {
+      splitDir.push_back(item);
+    }
+  }
+
+  std::string filename = splitDir.back();
+  splitDir.pop_back();
+
+  AddToFileTreeRecursive(tree, {&parent_entry}, {""}, splitDir,
+                         filename, dest, createFullPath, createIfNotExists);
 }
 
 // Deletes the given directory and anything under it. Returns true on success.

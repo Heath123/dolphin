@@ -54,7 +54,7 @@ add_library(discio
   WiiEncryptionCache.h
   WiiSaveBanner.cpp
   WiiSaveBanner.h
-)
+        Mod.cpp Mod.h)
 
 target_link_libraries(discio
 PUBLIC

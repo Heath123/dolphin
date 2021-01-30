@@ -176,6 +176,9 @@ bool CreateEmptyFile(const std::string& filename);
 // Recursive or non-recursive list of files and directories under directory.
 FSTEntry ScanDirectoryTree(const std::string& directory, bool recursive);
 
+// Add a file to a FSTEntry
+void AddToFileTree(FSTEntry& tree, std::string path, std::string dest, bool createFullPath, bool createIfNotExists);
+
 // deletes the given directory and anything under it. Returns true on success.
 bool DeleteDirRecursively(const std::string& directory);
 

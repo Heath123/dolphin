@@ -15,6 +15,7 @@
 #include <utility>
 #include <variant>
 #include <vector>
+#include <iostream>
 
 #include "Common/Align.h"
 #include "Common/Assert.h"
@@ -30,6 +31,7 @@
 #include "DiscIO/Blob.h"
 #include "DiscIO/VolumeWii.h"
 #include "DiscIO/WiiEncryptionCache.h"
+#include "Mod.h"
 
 namespace DiscIO
 {
@@ -325,6 +327,10 @@ static bool IsMainDolForNonGamePartition(const std::string& path)
     return false;  // volume_path is the game partition's /sys/main.dol
 
   const File::FSTEntry true_root_entry = File::ScanDirectoryTree(true_root, false);
+
+  // TODO: patch this in case a dol is added/changed??? But it should be there already, so probably not needed
+  // File::AddToTreeRecursive(true_root_entry, "/", "/Race/Course", "test.szs", "C:/Users/User/Desktop/test.txt");
+
   for (const File::FSTEntry& entry : true_root_entry.children)
   {
     if (entry.isDirectory &&
@@ -378,6 +384,10 @@ DirectoryBlobReader::DirectoryBlobReader(const std::string& game_partition_root,
     if (ParsePartitionDirectoryName(game_partition_directory_name) == PartitionType::Game)
     {
       const File::FSTEntry true_root_entry = File::ScanDirectoryTree(true_root, false);
+
+      // TODO? But it isn't recursive so it won't do much, so probably not needed
+      // File::AddToTreeRecursive(true_root_entry, "/", "/Race/Course", "test.szs", "C:/Users/User/Desktop/test.txt");
+
       for (const File::FSTEntry& entry : true_root_entry.children)
       {
         if (entry.isDirectory)
@@ -730,6 +740,63 @@ void DirectoryBlobPartition::BuildFST(u64 fst_address)
   m_fst_data.clear();
 
   File::FSTEntry rootEntry = File::ScanDirectoryTree(m_root_directory + "files/", true);
+
+  // TODO: rename to AddOrReplaceFileInTree or something? InjectToTree?
+
+  RiivolutionMod mod;
+  mod.readFromXML("/home/heath/ctgpr.xml", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA");
+
+  for (Patch patch : mod.patches) {
+    std::cout << "path" << patch.physicalPath << std::endl;
+    File::AddToFileTree(rootEntry, patch.discPath , patch.physicalPath, patch.createFullPath, patch.createIfNotExists);
+  }
+
+  /* File::AddToFileTree(rootEntry, "/Race/Course/ridgehighway_course.szs",
+    "/media/heath/Windows/Users/User/Desktop/ridgehighway_course_halogen.szs", false, false);
+
+  File::AddToFileTree(rootEntry, "/Race/Course/test.szs",
+                      "/media/heath/Windows/Users/User/Desktop/test.txt", false, true); */
+
+  /* File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "test.szs",
+                               "C:/Users/User/Desktop/test.txt", false, true);
+
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {}, "test.szs",
+                               "C:/Users/User/Desktop/test.txt", false, true); */
+
+
+  /* pugi::xml_document doc;
+
+  pugi::xml_parse_result result = doc.load_file("C:/Users/User/Downloads/CTGP-R 1.02.0003 BETA/riivolution/mkwiiriivoslottest.xml"); */
+
+  /* std::cout << "Load result: " << result.description()
+            << ", mesh name: " << doc.child("mesh").attribute("name").value() << std::endl; */
+
+
+  /*
+  File::AddToFileTreeRecursive(
+      rootEntry, {&parent_entry}, {""}, {"Scene", "UI"}, "MenuOther.szs",
+      "C:/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/menupatch/MenuOther.szs", false, false);
+  File::AddToFileTreeRecursive(
+      rootEntry, {&parent_entry}, {""}, {"Scene", "UI"}, "MenuMulti.szs",
+      "C:/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/menupatch/MenuMulti.szs", false, false);
+  File::AddToFileTreeRecursive(
+      rootEntry, {&parent_entry}, {""}, {"rel"}, "StaticR.rel",
+      "C:/Users/User/Downloads/CTGP-R 1.02.0003 BETA/mkwii/Level1/PAL/rel/StaticR.rel", false,
+      false);
+  File::AddToFileTreeRecursive(
+      rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "41.szs",
+      "C:/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/old_garden_ds/chomp_valley+fix.szs",
+      false, true);
+  File::AddToFileTreeRecursive(
+      rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "41_d.szs",
+      "C:/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/old_garden_ds/chomp_valley+fix.szs",
+      false, true);
+*/
+
+
+
+  /* File::AddToTreeRecursive(rootEntry, "", "/Race/Course", "test.szs",
+                           "C:/Users/User/Desktop/test.txt"); */
 
   ConvertUTF8NamesToSHIFTJIS(&rootEntry);
 
