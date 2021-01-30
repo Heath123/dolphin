@@ -329,7 +329,7 @@ static bool IsMainDolForNonGamePartition(const std::string& path)
   const File::FSTEntry true_root_entry = File::ScanDirectoryTree(true_root, false);
 
   // TODO: patch this in case a dol is added/changed??? But it should be there already, so probably not needed
-  // File::AddToTreeRecursive(true_root_entry, "/", "/Race/Course", "test.szs", "C:/Users/User/Desktop/test.txt");
+  // File::AddToTreeRecursive(true_root_entry, "/", "/Race/Course", "test.szs", "/media/heath/Windows/Users/User/Desktop/test.txt");
 
   for (const File::FSTEntry& entry : true_root_entry.children)
   {
@@ -386,7 +386,7 @@ DirectoryBlobReader::DirectoryBlobReader(const std::string& game_partition_root,
       const File::FSTEntry true_root_entry = File::ScanDirectoryTree(true_root, false);
 
       // TODO? But it isn't recursive so it won't do much, so probably not needed
-      // File::AddToTreeRecursive(true_root_entry, "/", "/Race/Course", "test.szs", "C:/Users/User/Desktop/test.txt");
+      // File::AddToTreeRecursive(true_root_entry, "/", "/Race/Course", "test.szs", "/media/heath/Windows/Users/User/Desktop/test.txt");
 
       for (const File::FSTEntry& entry : true_root_entry.children)
       {
@@ -743,13 +743,501 @@ void DirectoryBlobPartition::BuildFST(u64 fst_address)
 
   // TODO: rename to AddOrReplaceFileInTree or something? InjectToTree?
 
-  RiivolutionMod mod;
+  // TODO: Remove
+  // Create fake parent
+  File::FSTEntry parent_entry;
+  parent_entry.physicalName = ""; // TODO: need to use real physical name?
+  parent_entry.isDirectory = true;
+  parent_entry.size = 0;
+
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "40.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/kinoko_course/mushroom_peaks.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "40_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/kinoko_course/mushroom_peaks.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "41.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/old_garden_ds/chomp_valley.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "41_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/old_garden_ds/chomp_valley.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "44.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/koopa_course/snes_bowser_castle_2.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "44_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/koopa_course/snes_bowser_castle_2.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "45.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/old_falls_ds/codename_bigbox.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "45_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/old_falls_ds/codename_bigbox.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "46.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/old_koopa_gba/thwomp_cave.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "46_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/old_koopa_gba/thwomp_cave.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "47.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/old_mario_sfc/snes_mario_circuit_1.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "47_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/old_mario_sfc/snes_mario_circuit_1.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "48.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/old_heyho_gba/gba_cheep_cheep_island.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "48_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/old_heyho_gba/gba_cheep_cheep_island.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "49.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/old_sherbet_64/northpole_slide.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "49_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/old_sherbet_64/northpole_slide.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "4A.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/rainbow_course/snes_rainbow_road.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "4A_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/rainbow_course/snes_rainbow_road.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "4B.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/ridgehighway_course/space_road.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "4B_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/ridgehighway_course/space_road.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "4C.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/old_peach_gc/green_hill_zone.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "4C_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/old_peach_gc/green_hill_zone.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "4D.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/truck_course/asdf_course.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "4D_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/truck_course/asdf_course.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "4E.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/beginner_course/luigis_island.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "4E_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/beginner_course/luigis_island.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "4F.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/old_donkey_64/jungle_safari.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "4F_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/old_donkey_64/jungle_safari.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "50.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/senior_course/penguin_canyon.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "50_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/senior_course/penguin_canyon.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "51.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/volcano_course/incendia_castle.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "51_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/volcano_course/incendia_castle.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "52.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/farm_course/sunset_forest.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "52_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/farm_course/sunset_forest.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "53.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/old_waluigi_gc/warios_lair.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "53_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/old_waluigi_gc/warios_lair.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "54.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/boardcross_course/haunted_woods.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "54_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/boardcross_course/haunted_woods.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "55.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/castle_course/rezway.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "55_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/castle_course/rezway.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "56.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/old_mario_gc/kartwood_creek.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "56_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/old_mario_gc/kartwood_creek.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "57.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/treehouse_course/fishdom_island.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "57_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/treehouse_course/fishdom_island.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "58.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/shopping_course/gcn_rainbow_road.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "58_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/shopping_course/gcn_rainbow_road.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "59.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/old_mario_64/n64_royal_raceway.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "59_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/old_mario_64/n64_royal_raceway.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "5A.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/old_town_ds/n64_yoshi_valley.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "5A_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/old_town_ds/n64_yoshi_valley.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "5B.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/old_donkey_gc/ds_airship_fortress.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "5B_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/old_donkey_gc/ds_airship_fortress.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "5C.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/SixKingLabyrinth/SixKingLabyrinth129.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "5C_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/SixKingLabyrinth/SixKingLabyrinth129.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "5D.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/desert_course/gba_rainbow_road.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "5D_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/desert_course/gba_rainbow_road.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "5E.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/factory_course/gba_sky_garden.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "5E_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/factory_course/gba_sky_garden.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "5F.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Level2/NewCT1.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "5F_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Level2/NewCT1.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "60.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Level2/NewCT2.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "60_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Level2/NewCT2.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "61.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Level2/NewCT3.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "61_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Level2/NewCT3.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "62.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Level2/NewCT4.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "62_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Level2/NewCT4.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "63.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Level2/NewCT5.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "63_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Level2/NewCT5.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "64.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Level2/NewCT6.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "64_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Level2/NewCT6.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "65.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Level2/NewCT7.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "65_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Level2/NewC7.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "66.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Level2/NewCT8.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "66_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Level2/NewCT8.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "67.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Level2/NewCT9.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "67_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Level2/NewCT9.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "68.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Level2/NewCTA.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "68_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Level2/NewCTA.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "69.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Level2/NewCTB.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "69_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Level2/NewCTB.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "6A.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Level2/NewCTC.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "6A_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Level2/NewCTC_d.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "6B.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Level2/NewCTD.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "6B_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Level2/NewCTD.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "6C.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Level2/NewCTE.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "6C_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Level2/NewCTE.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "6D.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Level2/NewCTF.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "6D_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Level2/NewCTF.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "6E.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Level2/NewCTG.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "6E_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Level2/NewCTG.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "6F.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/6F.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "6F_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/6F.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "70.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/70.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "70_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/70.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "71.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/71.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "71_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/71.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "72.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/72.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "72_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/72.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "73.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/73.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "73_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/73.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "74.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/74.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "74_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/74.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "75.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/75.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "75_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/75.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "76.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/76.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "76_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/76.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "77.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/77.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "77_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/77.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "78.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/78.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "78_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/78.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "79.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/79.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "79_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/79.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "7A.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/7A.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "7A_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/7A.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "7B.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/7B.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "7B_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/7B.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "7C.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/7C.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "7C_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/7C.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "7D.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/7D.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "7D_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/7D.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "7E.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/7E.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "7E_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/7E.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "7F.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/7F.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "7F_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/7F.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "80.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/80.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "80_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/80.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "81.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/81.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "81_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/81.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "82.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/82.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "82_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/82.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "83.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/83.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "83_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/83.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "84.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/84.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "84_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/84.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "85.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/85.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "85_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/85.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "86.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/86.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "86_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/86.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "87.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/87.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "87_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/87.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "88.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/88.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "88_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/88.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "89.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/89.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "89_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/89.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "8A.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/8A.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "8A_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/8A.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "8B.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/8B.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "8B_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/8B_d.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "8C.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/8C.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "8C_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/8C.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "8D.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/8D.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "8D_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/8D.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "8E.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/8E.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "8E_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/8E.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "8F.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/8F.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "8F_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/8F.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "90.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/90.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "90_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/90.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "91.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/91.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "91_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/91.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "92.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/92.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "92_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/92.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "93.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/93.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "93_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/93.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "94.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/94.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "94_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/94.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "95.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/95.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "95_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/95.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "96.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/96.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "96_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/96.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "97.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/97.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "97_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/97_d.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "98.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/98.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "98_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/98.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "99.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/99.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "99_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/99.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "9A.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/9A.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "9A_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/9A.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "9B.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/9B.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "9B_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/9B.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "9C.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/9C.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "9C_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/9C.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "9D.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/9D.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "9D_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/9D.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "9E.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/9E.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "9E_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/9E_d.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "9F.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/9F.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "9F_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/9F.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "A0.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/A0.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "A0_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/A0.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "A1.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/A1.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "A1_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/A1.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "A2.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/A2.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "A2_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/A2.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "A3.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/A3.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "A3_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/A3.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "A4.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/A4.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "A4_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/A4.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "A5.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/A5.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "A5_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/A5.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "A6.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/A6.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "A6_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/A6.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "A7.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/A7.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "A7_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/A7.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "A8.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/A8.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "A8_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/A8.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "A9.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/A9.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "A9_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.00.0000/A9.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "kinoko_course.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.01.0000/02.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "kinoko_course.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.01.0000/02.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "volcano_course.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.01.0000/03.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "volcano_course_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.01.0000/03.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "shopping_course.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.01.0000/05.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "shopping_course_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.01.0000/05.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "truck_course.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.01.0000/07.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "truck_course_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.01.0000/07.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "AA.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.01.0000/AA.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "AA_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.01.0000/AA.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "AB.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.01.0000/AB.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "AB_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.01.0000/AB.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "AC.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.01.0000/AC.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "AC_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.01.0000/AC_d.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "AD.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.01.0000/AD.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "AD_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.01.0000/AD.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "AE.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.01.0000/AE.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "AE_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.01.0000/AE.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "AF.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.01.0000/AF.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "AF_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.01.0000/AF.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "B0.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.01.0000/B0.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "B0_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.01.0000/B0.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "B1.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.01.0000/B1.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "B1_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.01.0000/B1.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "B2.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.01.0000/B2.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "B2_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.01.0000/B2_d.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "B3.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.01.0000/B3.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "B3_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.01.0000/B3.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "B4.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.01.0000/B4.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "B4_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.01.0000/B4.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "B5.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.01.0000/B5.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "B5_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.01.0000/B5.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "B6.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.01.0000/B6.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "B6_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.01.0000/B6.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "B7.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.01.0000/B7.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "B7_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.01.0000/B7.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "B8.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.01.0000/B8.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "B8_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.01.0000/B8.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "B9.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.01.0000/B9.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "B9_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.01.0000/B9.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "BA.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.01.0000/BA.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "BA_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.01.0000/BA.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "BB.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.01.0000/BB.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "BB_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.01.0000/BB.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "BC.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.01.0000/BC.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "BC_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.01.0000/BC.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "BD.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.01.0000/BD.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "BD_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.01.0000/BD.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "BE.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.01.0000/BE.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "BE_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.01.0000/BE.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "BF.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.01.0000/BF.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "BF_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.01.0000/BF.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "C0.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.01.0000/C0.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "C0_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.01.0000/C0.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "C1.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.01.0000/C1.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "C1_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.01.0000/C1.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "C2.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/C2.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "C2_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/C2.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "C3.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/C3.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "C3_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/C3.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "C4.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/C4.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "C4_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/C4.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "C5.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/C5.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "C5_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/C5.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "C6.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/C6.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "C6_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/C6.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "C7.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/C7.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "C7_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/C7.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "C8.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/C8.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "C8_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/C8.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "C9.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/C9.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "C9_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/C9.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "CA.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/CA.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "CA_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/CA.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "CB.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/CB.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "CB_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/CB.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "CC.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/CC.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "CC_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/CC.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "CD.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/CD.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "CD_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/CD.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "CE.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/CE.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "CE_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/CE.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "CF.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/CF.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "CF_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/CF.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "D0.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/D0.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "D0_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/D0.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "D1.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/D1.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "D1_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/D1.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "D2.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/D2.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "D2_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/D2.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "D3.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/D3.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "D3_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/D3.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "D4.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/D4.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "D4_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/D4.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "D5.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/D5.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "D5_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/D5.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "D6.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/D6.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "D6_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/D6.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "D7.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/D7.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "D7_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/D7.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "D8.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/D8.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "D8_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/D8.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "D9.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/D9.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "D9_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/D9.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "DA.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/DA.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "DA_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/DA.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "DB.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/DB.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "DB_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/DB.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "DC.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/DC.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "DC_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/DC.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "DD.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/DD.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "DD_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/DD.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "DE.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/DE.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "DE_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/DE.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "DF.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/DF.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "DF_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/DF.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "E0.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/E0.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "E0_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/E0.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "E1.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/E1.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "E1_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/E1.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "E2.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/E2.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "E2_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/E2.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "E3.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/E3.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "E3_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/E3.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "E4.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/E4.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "E4_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/E4.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "E5.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/E5.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "E5_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/E5.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "E6.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/E6.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "E6_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/E6.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "E7.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/E7.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "E7_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/E7_d.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "E8.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/E8.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "E8_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/E8.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "E9.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/E9.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "E9_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/E9.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "EA.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/EA.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "EA_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/EA.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "EB.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/EB.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "EB_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/EB.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "EC.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/EC.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "EC_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/EC.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "ED.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/ED.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "ED_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/ED.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "EE.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/EE.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "EE_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/EE.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "EF.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/EF.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "EF_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/EF.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "F0.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/F0.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "F0_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/F0.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "F1.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/F1.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "F1_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/F1.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "F2.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/F2.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "F2_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/F2.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "F3.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/F3.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "F3_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/F3.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "F4.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/F4.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "F4_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/F4.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "F5.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/F5.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "F5_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/F5.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "F6.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/F6.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "F6_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/F6.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "F7.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/F7.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "F7_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/F7.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "F8.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/F8.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "F8_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/F8.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "F9.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/F9.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "F9_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/F9.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "2A.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/2A.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "2A_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/2A.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "2B.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/2B.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "2B_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/2B.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "2C.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/2C.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "2C_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/2C.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "2D.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/2D.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "2D_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/2D.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "2E.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/2E.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "2E_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/2E.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "2F.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/2F.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "2F_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/2F.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "30.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/30.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "30_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/30.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "31.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/31.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "31_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/31.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "32.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/32.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "32_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/32.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "33.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/33.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "33_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/33.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "34.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/34.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "34_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/34.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "35.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/35.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "35_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/35.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "3B.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/3B.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "3B_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/3B.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "3C.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/3C.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "3C_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/3C.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "3D.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/3D.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "3D_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/3D.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "3E.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/3E.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "3E_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/3E.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "3F.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/3F.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "3F_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/Revo1.02.0000/3F.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Boot", "Strap", "eu"}, "English.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/menupatch/PAL/English.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Boot", "Strap", "eu"}, "Dutch.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/menupatch/PAL/Dutch.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Boot", "Strap", "eu"}, "French.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/menupatch/PAL/French.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Boot", "Strap", "eu"}, "German.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/menupatch/PAL/German.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Boot", "Strap", "eu"}, "Italian.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/menupatch/PAL/Italian.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Boot", "Strap", "eu"}, "Spanish_EU.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/menupatch/PAL/Spanish.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Boot", "Strap", "us"}, "English.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/menupatch/PAL/English.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Boot", "Strap", "us"}, "French.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/menupatch/PAL/English.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Boot", "Strap", "us"}, "Spanish_US.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/menupatch/PAL/English.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Boot", "Strap", "jp"}, "jp.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/menupatch/PAL/English.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Scene", "UI"}, "Award_E.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/textpatch/SuperMenu_E.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Scene", "UI"}, "Channel_E.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/textpatch/SuperMenu_E.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Scene", "UI"}, "Event_E.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/textpatch/SuperMenu_E.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Scene", "UI"}, "Globe_E.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/textpatch/SuperMenu_E.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Scene", "UI"}, "MenuMulti_E.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/textpatch/SuperMenu_E.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Scene", "UI"}, "MenuOther_E.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/textpatch/SuperMenu_E.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Scene", "UI"}, "MenuSingle_E.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/textpatch/SuperMenu_E.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Scene", "UI"}, "Present_E.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/textpatch/SuperMenu_E.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Scene", "UI"}, "Race_E.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/textpatch/SuperMenu_E.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Scene", "UI"}, "Title_E.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/textpatch/SuperMenu_E.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Scene", "UI"}, "Award_F.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/textpatch/SuperMenu_F.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Scene", "UI"}, "Channel_F.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/textpatch/SuperMenu_F.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Scene", "UI"}, "Event_F.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/textpatch/SuperMenu_F.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Scene", "UI"}, "Globe_F.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/textpatch/SuperMenu_F.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Scene", "UI"}, "MenuMulti_F.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/textpatch/SuperMenu_F.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Scene", "UI"}, "MenuOther_F.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/textpatch/SuperMenu_F.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Scene", "UI"}, "MenuSingle_F.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/textpatch/SuperMenu_F.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Scene", "UI"}, "Present_F.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/textpatch/SuperMenu_F.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Scene", "UI"}, "Race_F.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/textpatch/SuperMenu_F.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Scene", "UI"}, "Title_F.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/textpatch/SuperMenu_F.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Scene", "UI"}, "Award_G.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/textpatch/SuperMenu_G.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Scene", "UI"}, "Channel_G.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/textpatch/SuperMenu_G.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Scene", "UI"}, "Event_G.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/textpatch/SuperMenu_G.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Scene", "UI"}, "Globe_G.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/textpatch/SuperMenu_G.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Scene", "UI"}, "MenuMulti_G.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/textpatch/SuperMenu_G.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Scene", "UI"}, "MenuOther_G.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/textpatch/SuperMenu_G.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Scene", "UI"}, "MenuSingle_G.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/textpatch/SuperMenu_G.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Scene", "UI"}, "Present_G.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/textpatch/SuperMenu_G.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Scene", "UI"}, "Race_G.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/textpatch/SuperMenu_G.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Scene", "UI"}, "Title_G.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/textpatch/SuperMenu_G.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Scene", "UI"}, "Award_I.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/textpatch/SuperMenu_I.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Scene", "UI"}, "Channel_I.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/textpatch/SuperMenu_I.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Scene", "UI"}, "Event_I.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/textpatch/SuperMenu_I.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Scene", "UI"}, "Globe_I.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/textpatch/SuperMenu_I.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Scene", "UI"}, "MenuMulti_I.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/textpatch/SuperMenu_I.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Scene", "UI"}, "MenuOther_I.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/textpatch/SuperMenu_I.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Scene", "UI"}, "MenuSingle_I.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/textpatch/SuperMenu_I.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Scene", "UI"}, "Present_I.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/textpatch/SuperMenu_I.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Scene", "UI"}, "Race_I.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/textpatch/SuperMenu_I.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Scene", "UI"}, "Title_I.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/textpatch/SuperMenu_I.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Scene", "UI"}, "Award_S.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/textpatch/SuperMenu_S.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Scene", "UI"}, "Channel_S.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/textpatch/SuperMenu_S.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Scene", "UI"}, "Event_S.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/textpatch/SuperMenu_S.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Scene", "UI"}, "Globe_S.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/textpatch/SuperMenu_S.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Scene", "UI"}, "MenuMulti_S.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/textpatch/SuperMenu_S.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Scene", "UI"}, "MenuOther_S.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/textpatch/SuperMenu_S.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Scene", "UI"}, "MenuSingle_S.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/textpatch/SuperMenu_S.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Scene", "UI"}, "Present_S.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/textpatch/SuperMenu_S.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Scene", "UI"}, "Race_S.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/textpatch/SuperMenu_S.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Scene", "UI"}, "Title_S.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/textpatch/SuperMenu_S.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Scene", "UI"}, "Title.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/menupatch/Title.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Scene", "UI"}, "Globe.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/menupatch/Globe.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Scene", "UI"}, "Channel.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/menupatch/Channel.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Scene", "UI"}, "MenuSingle.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/menupatch/MenuSingle.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Scene", "UI"}, "MenuOther.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/menupatch/MenuOther.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Scene", "UI"}, "MenuMulti.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/menupatch/MenuMulti.szs", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"rel"}, "StaticR.rel", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA/mkwii/Level1/PAL/rel/StaticR.rel", false, false);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "41.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/old_garden_ds/chomp_valley+fix.szs", false, true);
+  File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "41_d.szs", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/old_garden_ds/chomp_valley+fix.szs", false, true);
+
+
+  /* RiivolutionMod mod;
   mod.readFromXML("/home/heath/ctgpr.xml", "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA");
 
   for (Patch patch : mod.patches) {
     std::cout << "path" << patch.physicalPath << std::endl;
     File::AddToFileTree(rootEntry, patch.discPath , patch.physicalPath, patch.createFullPath, patch.createIfNotExists);
-  }
+  } */
 
   /* File::AddToFileTree(rootEntry, "/Race/Course/ridgehighway_course.szs",
     "/media/heath/Windows/Users/User/Desktop/ridgehighway_course_halogen.szs", false, false);
@@ -758,15 +1246,15 @@ void DirectoryBlobPartition::BuildFST(u64 fst_address)
                       "/media/heath/Windows/Users/User/Desktop/test.txt", false, true); */
 
   /* File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "test.szs",
-                               "C:/Users/User/Desktop/test.txt", false, true);
+                               "/media/heath/Windows/Users/User/Desktop/test.txt", false, true);
 
   File::AddToFileTreeRecursive(rootEntry, {&parent_entry}, {""}, {}, "test.szs",
-                               "C:/Users/User/Desktop/test.txt", false, true); */
+                               "/media/heath/Windows/Users/User/Desktop/test.txt", false, true); */
 
 
   /* pugi::xml_document doc;
 
-  pugi::xml_parse_result result = doc.load_file("C:/Users/User/Downloads/CTGP-R 1.02.0003 BETA/riivolution/mkwiiriivoslottest.xml"); */
+  pugi::xml_parse_result result = doc.load_file("/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA/riivolution/mkwiiriivoslottest.xml"); */
 
   /* std::cout << "Load result: " << result.description()
             << ", mesh name: " << doc.child("mesh").attribute("name").value() << std::endl; */
@@ -775,28 +1263,28 @@ void DirectoryBlobPartition::BuildFST(u64 fst_address)
   /*
   File::AddToFileTreeRecursive(
       rootEntry, {&parent_entry}, {""}, {"Scene", "UI"}, "MenuOther.szs",
-      "C:/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/menupatch/MenuOther.szs", false, false);
+      "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/menupatch/MenuOther.szs", false, false);
   File::AddToFileTreeRecursive(
       rootEntry, {&parent_entry}, {""}, {"Scene", "UI"}, "MenuMulti.szs",
-      "C:/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/menupatch/MenuMulti.szs", false, false);
+      "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/menupatch/MenuMulti.szs", false, false);
   File::AddToFileTreeRecursive(
       rootEntry, {&parent_entry}, {""}, {"rel"}, "StaticR.rel",
-      "C:/Users/User/Downloads/CTGP-R 1.02.0003 BETA/mkwii/Level1/PAL/rel/StaticR.rel", false,
+      "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA/mkwii/Level1/PAL/rel/StaticR.rel", false,
       false);
   File::AddToFileTreeRecursive(
       rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "41.szs",
-      "C:/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/old_garden_ds/chomp_valley+fix.szs",
+      "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/old_garden_ds/chomp_valley+fix.szs",
       false, true);
   File::AddToFileTreeRecursive(
       rootEntry, {&parent_entry}, {""}, {"Race", "Course"}, "41_d.szs",
-      "C:/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/old_garden_ds/chomp_valley+fix.szs",
+      "/media/heath/Windows/Users/User/Downloads/CTGP-R 1.02.0003 BETA//mkwii/old_garden_ds/chomp_valley+fix.szs",
       false, true);
 */
 
 
 
   /* File::AddToTreeRecursive(rootEntry, "", "/Race/Course", "test.szs",
-                           "C:/Users/User/Desktop/test.txt"); */
+                           "/media/heath/Windows/Users/User/Desktop/test.txt"); */
 
   ConvertUTF8NamesToSHIFTJIS(&rootEntry);
 
