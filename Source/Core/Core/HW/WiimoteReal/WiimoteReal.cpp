@@ -26,7 +26,7 @@
 #include "Core/HW/WiimoteReal/IOWin.h"
 #include "Core/HW/WiimoteReal/IOdarwin.h"
 #include "Core/HW/WiimoteReal/IOhidapi.h"
-#include "InputCommon/ControllerInterface/Wiimote/Wiimote.h"
+#include "InputCommon/ControllerInterface/Wiimote/WiimoteController.h"
 #include "InputCommon/InputConfig.h"
 
 #include "SFML/Network.hpp"
@@ -85,7 +85,7 @@ static void TryToFillWiimoteSlot(u32 index)
   // If the pool is empty, attempt to steal from ControllerInterface.
   if (s_wiimote_pool.empty())
   {
-    ciface::Wiimote::ReleaseDevices(1);
+    ciface::WiimoteController::ReleaseDevices(1);
 
     // Still empty?
     if (s_wiimote_pool.empty())
@@ -108,13 +108,13 @@ void ProcessWiimotePool()
   if (SConfig::GetInstance().connect_wiimotes_for_ciface)
   {
     for (auto& entry : s_wiimote_pool)
-      ciface::Wiimote::AddDevice(std::move(entry.wiimote));
+      ciface::WiimoteController::AddDevice(std::move(entry.wiimote));
 
     s_wiimote_pool.clear();
   }
   else
   {
-    ciface::Wiimote::ReleaseDevices();
+    ciface::WiimoteController::ReleaseDevices();
   }
 }
 
@@ -858,7 +858,7 @@ void Shutdown()
     HandleWiimoteDisconnect(i);
 
   // Release remotes from ControllerInterface and empty the pool.
-  ciface::Wiimote::ReleaseDevices();
+  ciface::WiimoteController::ReleaseDevices();
   s_wiimote_pool.clear();
 }
 
@@ -916,7 +916,9 @@ static void TryToConnectBalanceBoard(std::unique_ptr<Wiimote> wm)
 static void HandleWiimoteDisconnect(int index)
 {
   Core::RunAsCPUThread([index] {
-    g_wiimotes[index] = nullptr;
+    // The Wii Remote object must exist through the call to UpdateSource
+    // to prevent WiimoteDevice from having a dangling HIDWiimote pointer.
+    const auto temp_real_wiimote = std::move(g_wiimotes[index]);
     WiimoteCommon::UpdateSource(index);
   });
 }
