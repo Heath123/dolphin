@@ -262,10 +262,10 @@ static bool PathEndsWith(const std::string& path, const std::string& suffix)
 static bool IsValidDirectoryBlob(const std::string& dol_path, std::string* partition_root,
                                  std::string* true_root = nullptr)
 {
-  if (!PathEndsWith(dol_path, "/sys/main.dol"))
+  if (!PathEndsWith(dol_path, "/sys/main_ctgp.dol"))
     return false;
 
-  const size_t chars_to_remove = std::string("sys/main.dol").size();
+  const size_t chars_to_remove = std::string("sys/main_ctgp.dol").size();
   *partition_root = dol_path.substr(0, dol_path.size() - chars_to_remove);
 
   if (File::GetSize(*partition_root + "sys/boot.bin") < 0x20)
@@ -304,7 +304,7 @@ static bool IsInFilesDirectory(const std::string& path)
     const size_t slash_after_pos = files_pos + 5;
     if ((files_pos == 0 || IsDirectorySeparator(path[slash_before_pos])) &&
         (slash_after_pos == path.size() || (IsDirectorySeparator(path[slash_after_pos]))) &&
-        ExistsAndIsValidDirectoryBlob(path.substr(0, files_pos) + "sys/main.dol"))
+        ExistsAndIsValidDirectoryBlob(path.substr(0, files_pos) + "sys/main_ctgp.dol"))
     {
       return true;
     }
@@ -317,14 +317,14 @@ static bool IsMainDolForNonGamePartition(const std::string& path)
 {
   std::string partition_root, true_root;
   if (!IsValidDirectoryBlob(path, &partition_root, &true_root))
-    return false;  // This is not a /sys/main.dol
+    return false;  // This is not a /sys/main_ctgp.dol
 
   std::string partition_directory_name = partition_root.substr(true_root.size());
   partition_directory_name.pop_back();  // Remove trailing slash
   const std::optional<PartitionType> partition_type =
       ParsePartitionDirectoryName(partition_directory_name);
   if (!partition_type || *partition_type == PartitionType::Game)
-    return false;  // volume_path is the game partition's /sys/main.dol
+    return false;  // volume_path is the game partition's /sys/main_ctgp.dol
 
   const File::FSTEntry true_root_entry = File::ScanDirectoryTree(true_root, false);
 
@@ -335,13 +335,13 @@ static bool IsMainDolForNonGamePartition(const std::string& path)
   {
     if (entry.isDirectory &&
         ParsePartitionDirectoryName(entry.virtualName) == PartitionType::Game &&
-        ExistsAndIsValidDirectoryBlob(entry.physicalName + "/sys/main.dol"))
+        ExistsAndIsValidDirectoryBlob(entry.physicalName + "/sys/main_ctgp.dol"))
     {
-      return true;  // volume_path is the /sys/main.dol for a non-game partition
+      return true;  // volume_path is the /sys/main_ctgp.dol for a non-game partition
     }
   }
 
-  return false;  // volume_path is the game partition's /sys/main.dol
+  return false;  // volume_path is the game partition's /sys/main_ctgp.dol
 }
 
 bool ShouldHideFromGameList(const std::string& volume_path)
@@ -727,7 +727,7 @@ u64 DirectoryBlobPartition::SetApploader()
 
 u64 DirectoryBlobPartition::SetDOL(u64 dol_address)
 {
-  const u64 dol_size = m_contents.CheckSizeAndAdd(dol_address, m_root_directory + "sys/main.dol");
+  const u64 dol_size = m_contents.CheckSizeAndAdd(dol_address, m_root_directory + "sys/main_ctgp.dol");
 
   Write32(static_cast<u32>(dol_address >> m_address_shift), 0x0420, &m_disc_header);
 
