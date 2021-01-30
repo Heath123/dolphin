@@ -171,6 +171,7 @@ BootParameters::GenerateFromFile(std::vector<std::string> paths,
       {".gcm", ".iso", ".tgc", ".wbfs", ".ciso", ".gcz", ".wia", ".rvz", ".dol", ".elf"}};
   if (disc_image_extensions.find(extension) != disc_image_extensions.end() || is_drive)
   {
+    path = "/home/heath/mkdisc/DATA/sys/main.dol";
     std::unique_ptr<DiscIO::VolumeDisc> disc = DiscIO::CreateDisc(path);
     if (disc)
     {
